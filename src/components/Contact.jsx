@@ -129,6 +129,12 @@ export default function Contact() {
             ))}
           </div>
         </motion.div>
+
+        <div className="mt-20 flex justify-center">
+          <span className="text-[60px] sm:text-[90px] md:text-[120px] lg:text-[160px] font-black uppercase tracking-[0.35em] text-white/5 select-none">
+            HIMANSHU
+          </span>
+        </div>
       </div>
     </section>
   );

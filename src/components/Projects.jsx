@@ -1,50 +1,43 @@
 import { motion } from "framer-motion";
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 const PROJECTS = [
   {
     id: 1,
-    num: "01",
     title: "Margam AI",
-    subtitle: "LLM-Powered Study Abroad Assistant",
-    problem: "Complex, document-heavy study abroad process overwhelmed counselors.",
-    build: "Engineered an LLM-powered assistant to automate student guidance & dynamic action plans.",
-    stack: ["Python", "LangChain", "Prompt Engineering", "API Integrations"],
+    description: "LLM-powered study abroad assistant with intelligent guidance and action planning.",
     img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200",
-    impact: "Streamlined consultancy workflows, enabling higher student volume with minimal overhead.",
     color: "from-violet-600/20 to-indigo-600/10",
-    accentColor: "text-violet-400",
     borderColor: "border-violet-500/20",
-    pillColor: "bg-violet-500/10 text-violet-300 border-violet-500/20",
+    demoLink: "https://example.com/margam-ai",
   },
   {
     id: 2,
-    num: "02",
     title: "Restaurant Platform",
-    subtitle: "High-Performance Next-Gen UI",
-    problem: "Outdated digital presences causing high bounce rates and poor conversion.",
-    build: "Conversion-optimized landing page with lightning-fast loads and premium micro-animations.",
-    stack: ["React", "Tailwind CSS", "Framer Motion", "Vite"],
+    description: "Fast, conversion-focused restaurant UI built with premium animations and modern layout.",
     img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1200",
-    impact: "Maximized customer retention and elevated premium brand identity in a competitive market.",
     color: "from-emerald-600/20 to-teal-600/10",
-    accentColor: "text-emerald-400",
     borderColor: "border-emerald-500/20",
-    pillColor: "bg-emerald-500/10 text-emerald-300 border-emerald-500/20",
+    demoLink: "https://example.com/restaurant-platform",
   },
   {
     id: 3,
-    num: "03",
     title: "Study Abroad Funnel",
-    subtitle: "High-Intent Conversion Engine",
-    problem: "Fragmented acquisition funnels with low lead quality and high drop-off rates.",
-    build: "Structured, SEO-optimized page with clear user journeys and behavioral pathways.",
-    stack: ["WordPress", "SEO", "Web Analytics", "CRO"],
+    description: "High-intent acquisition funnel designed for clarity, lead conversion, and engagement.",
     img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1200",
-    impact: "Consolidated user journeys into a seamless, high-converting acquisition funnel.",
     color: "from-amber-600/20 to-orange-600/10",
-    accentColor: "text-amber-400",
     borderColor: "border-amber-500/20",
-    pillColor: "bg-amber-500/10 text-amber-300 border-amber-500/20",
+    demoLink: "https://example.com/study-abroad-funnel",
+  },
+  {
+    id: 4,
+    title: "Personal Portfolio",
+    description: "Modern developer portfolio experience with fast animations, product highlights, and lead capture.",
+    img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200",
+    color: "from-sky-600/20 to-cyan-600/10",
+    borderColor: "border-sky-500/20",
+    demoLink: BASE_URL,
   },
 ];
 
@@ -55,62 +48,39 @@ function ProjectCard({ project, i }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ delay: i * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className={`group relative flex flex-col rounded-3xl overflow-hidden border ${project.borderColor} bg-gradient-to-br ${project.color} backdrop-blur-xl transition-all duration-500 hover:shadow-[0_0_60px_-10px_rgba(99,102,241,0.15)] hover:-translate-y-1`}
+      className={`group relative flex flex-col rounded-[2rem] overflow-hidden border border-white/10 ${project.borderColor} bg-gradient-to-br ${project.color} backdrop-blur-xl shadow-[0_20px_80px_-40px_rgba(15,23,42,0.65)] transition-all duration-500 hover:-translate-y-1`}
     >
       {/* Image */}
-      <div className="relative w-full aspect-[16/9] overflow-hidden">
+      <div className="relative w-full aspect-[5/4] overflow-hidden">
         <div className="absolute inset-0 bg-[#0a0a0a] animate-pulse" />
         <img
           src={project.img}
           alt={project.title}
           loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] opacity-70 group-hover:opacity-90"
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] opacity-80 group-hover:opacity-100"
         />
-        {/* Image overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent" />
-
-        {/* Floating number */}
-        <span className="absolute top-5 left-5 text-xs font-black tracking-widest text-white/20">
-          {project.num}
-        </span>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent" />
       </div>
 
       {/* Body */}
-      <div className="flex flex-col flex-grow p-7 gap-5">
+      <div className="flex flex-col flex-grow p-7 gap-4">
         <div>
-          <h3 className="text-2xl font-bold text-white mb-1">{project.title}</h3>
-          <p className={`text-sm font-medium ${project.accentColor}`}>{project.subtitle}</p>
+          <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
+          <p className="text-sm text-white/70 leading-relaxed">{project.description}</p>
         </div>
 
-        <div className="space-y-4 flex-grow">
-          <div>
-            <span className="text-[10px] tracking-widest uppercase text-white/30 font-semibold block mb-1.5">The Problem</span>
-            <p className="text-white/60 text-sm leading-relaxed">{project.problem}</p>
+        {project.demoLink && (
+          <div className="mt-auto">
+            <a
+              href={project.demoLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-full px-4 py-3 rounded-full bg-white/10 text-sm font-semibold text-white border border-white/10 hover:bg-white/15 transition-colors duration-300"
+            >
+              View Live Demo
+            </a>
           </div>
-          <div>
-            <span className="text-[10px] tracking-widest uppercase text-white/30 font-semibold block mb-1.5">The Build</span>
-            <p className="text-white/60 text-sm leading-relaxed">{project.build}</p>
-          </div>
-          <div>
-            <span className="text-[10px] tracking-widest uppercase text-white/30 font-semibold block mb-2">Tech Stack</span>
-            <div className="flex flex-wrap gap-1.5">
-              {project.stack.map((s) => (
-                <span
-                  key={s}
-                  className={`px-2.5 py-1 rounded-full text-xs font-medium border ${project.pillColor}`}
-                >
-                  {s}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Impact */}
-        <div className="pt-5 border-t border-white/5">
-          <span className="text-[10px] tracking-widest uppercase text-emerald-400 font-semibold block mb-1.5">Impact</span>
-          <p className="text-white/80 text-sm font-medium leading-relaxed">{project.impact}</p>
-        </div>
+        )}
       </div>
     </motion.article>
   );
@@ -142,7 +112,7 @@ export default function Projects() {
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {PROJECTS.map((p, i) => (
             <ProjectCard key={p.id} project={p} i={i} />
           ))}

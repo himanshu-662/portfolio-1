@@ -109,7 +109,7 @@ export default function Overlay() {
           </div>
 
           {/* Social links */}
-          <div className="flex justify-center gap-6 mt-10 pointer-events-auto">
+          <div className="flex justify-center gap-6 mt-10 mb-14 pointer-events-auto">
             {SOCIAL.map((s) => (
               <a
                 key={s.label}
@@ -117,7 +117,7 @@ export default function Overlay() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="text-white/30 hover:text-white transition-all duration-300 hover:scale-110"
+                className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 text-white/30 transition-all duration-300 backdrop-blur-xl shadow-[0_15px_40px_-20px_rgba(255,255,255,0.35)] hover:bg-white/10 hover:text-white hover:scale-110"
               >
                 {s.icon}
               </a>
