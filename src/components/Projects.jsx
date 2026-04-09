@@ -10,7 +10,7 @@ const PROJECTS = [
     img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200",
     color: "from-violet-600/20 to-indigo-600/10",
     borderColor: "border-violet-500/20",
-    demoLink: "https://example.com/margam-ai",
+    demoLink: "https://ai.yourmargam.com/",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const PROJECTS = [
     img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1200",
     color: "from-emerald-600/20 to-teal-600/10",
     borderColor: "border-emerald-500/20",
-    demoLink: "https://example.com/restaurant-platform",
+    demoLink: "https://himanshu-662.github.io/restaurant-landing/",
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ const PROJECTS = [
     img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1200",
     color: "from-amber-600/20 to-orange-600/10",
     borderColor: "border-amber-500/20",
-    demoLink: "https://example.com/study-abroad-funnel",
+    demoLink: "https://cyan-beaver-592842.hostingersite.com/",
   },
   {
     id: 4,
