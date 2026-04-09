@@ -1,107 +1,138 @@
-"use client";
-
 import { motion } from "framer-motion";
-import { 
-  Brain, MessageSquare, Link, Globe, Bot, 
-  Code, Wind, FileCode, Server, Database, Monitor, 
-  FileText, Map, Users, RefreshCcw, TrendingUp, 
-  GitBranch, Zap, PenTool, Layout, Book, CheckSquare, Send, GitPullRequest,
-  Box, Terminal, BarChart, Settings
+import {
+  Brain, MessageSquare, Link, Globe, Bot,
+  Code, Wind, FileCode, Server, Database, Monitor,
+  FileText, Map, Users, RefreshCcw, TrendingUp,
+  GitBranch, Zap, PenTool, Layout, Book, CheckSquare,
+  Send, GitPullRequest, Box, Terminal, Settings
 } from "lucide-react";
 
-const SKILL_CATEGORIES = [
+const CATEGORIES = [
   {
     title: "AI & Machine Learning",
+    desc: "Building intelligent systems that learn and adapt.",
     skills: [
-       { name: "Gen AI", icon: Brain },
-       { name: "Large Language Models (LLMs)", icon: MessageSquare },
-       { name: "LangChain", icon: Link },
-       { name: "NLP", icon: Globe },
-       { name: "AI Automation", icon: Bot }
+      { name: "Generative AI", icon: Brain },
+      { name: "LLMs", icon: MessageSquare },
+      { name: "LangChain", icon: Link },
+      { name: "NLP", icon: Globe },
+      { name: "AI Automation", icon: Bot },
     ],
-    color: "from-purple-500 to-blue-500",
-    Icon: Brain
+    gradient: "from-violet-500 to-indigo-500",
+    glow: "rgba(139,92,246,0.15)",
+    Icon: Brain,
   },
   {
     title: "Web Development",
+    desc: "Crafting fast, beautiful, production-grade interfaces.",
     skills: [
-       { name: "React.js", icon: Code },
-       { name: "Tailwind CSS", icon: Wind },
-       { name: "JavaScript/HTML/CSS", icon: FileCode },
-       { name: "FastAPI & Python", icon: Server },
-       { name: "MongoDB", icon: Database },
-       { name: "WordPress", icon: Monitor }
+      { name: "React.js", icon: Code },
+      { name: "Tailwind CSS", icon: Wind },
+      { name: "JavaScript", icon: FileCode },
+      { name: "FastAPI & Python", icon: Server },
+      { name: "MongoDB", icon: Database },
+      { name: "WordPress", icon: Monitor },
     ],
-     color: "from-emerald-500 to-teal-500",
-     Icon: Code
+    gradient: "from-emerald-500 to-teal-500",
+    glow: "rgba(52,211,153,0.12)",
+    Icon: Code,
   },
   {
     title: "Product Strategy",
+    desc: "Translating user research into shipping roadmaps.",
     skills: [
-       { name: "Product Requirements (PRDs)", icon: FileText },
-       { name: "Roadmapping", icon: Map },
-       { name: "User Research", icon: Users },
-       { name: "Agile/Scrum", icon: RefreshCcw },
-       { name: "KPI Tracking", icon: TrendingUp }
+      { name: "PRDs", icon: FileText },
+      { name: "Roadmapping", icon: Map },
+      { name: "User Research", icon: Users },
+      { name: "Agile/Scrum", icon: RefreshCcw },
+      { name: "KPI Tracking", icon: TrendingUp },
     ],
-     color: "from-orange-500 to-pink-500",
-     Icon: Box
+    gradient: "from-rose-500 to-pink-500",
+    glow: "rgba(244,63,94,0.12)",
+    Icon: Box,
   },
   {
     title: "Tools & Platforms",
+    desc: "Automating workflows and shipping with precision.",
     skills: [
-       { name: "n8n", icon: GitBranch },
-       { name: "Make.com", icon: Zap },
-       { name: "Zapier", icon: Settings },
-       { name: "Figma", icon: PenTool },
-       { name: "Framer", icon: Layout },
-       { name: "Notion", icon: Book },
-       { name: "Jira", icon: CheckSquare },
-       { name: "Postman", icon: Send },
-       { name: "Git/GitHub", icon: GitPullRequest }
+      { name: "n8n", icon: GitBranch },
+      { name: "Make.com", icon: Zap },
+      { name: "Zapier", icon: Settings },
+      { name: "Figma", icon: PenTool },
+      { name: "Notion", icon: Book },
+      { name: "Git/GitHub", icon: GitPullRequest },
+      { name: "Jira", icon: CheckSquare },
+      { name: "Postman", icon: Send },
     ],
-     color: "from-yellow-400 to-amber-600",
-     Icon: Terminal
-  }
+    gradient: "from-amber-500 to-orange-500",
+    glow: "rgba(245,158,11,0.12)",
+    Icon: Terminal,
+  },
 ];
+
+function SkillCard({ cat, i }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="group relative rounded-3xl p-7 border border-white/5 bg-white/[0.03] backdrop-blur-xl transition-all duration-500 overflow-hidden hover:border-white/10 hover:-translate-y-1"
+      style={{ boxShadow: `0 0 0 0 ${cat.glow}` }}
+    >
+      {/* Hover glow */}
+      <div
+        className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: `radial-gradient(circle at 50% 0%, ${cat.glow}, transparent 70%)` }}
+      />
+
+      {/* Icon */}
+      <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center mb-6 shadow-lg`}>
+        <cat.Icon className="w-6 h-6 text-white" strokeWidth={1.5} />
+      </div>
+
+      <h3 className="text-xl font-bold text-white mb-1.5">{cat.title}</h3>
+      <p className="text-white/40 text-sm font-light mb-6 leading-relaxed">{cat.desc}</p>
+
+      <div className="flex flex-wrap gap-2">
+        {cat.skills.map((skill) => (
+          <span
+            key={skill.name}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/8 text-xs text-white/60 font-medium hover:bg-white/10 transition-colors cursor-default"
+          >
+            <skill.icon className="w-3 h-3" strokeWidth={1.5} />
+            {skill.name}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Skills() {
   return (
-    <section className="bg-[#121212] text-white py-32 px-6 md:px-16 border-t border-white/5 relative z-20">
-      <div className="max-w-[90rem] mx-auto">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+    <section className="relative bg-[#0a0a0a] text-white py-36 px-6 md:px-16 border-t border-white/5">
+      {/* Ambient */}
+      <div className="absolute top-0 right-0 w-[500px] h-[400px] bg-violet-700/8 blur-[150px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-20 text-center"
+          transition={{ duration: 0.8 }}
+          className="mb-24"
         >
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">Technical Arsenal</h2>
-          <div className="w-24 h-1 bg-white/20 rounded-full mx-auto" />
+          <p className="text-xs tracking-widest uppercase text-violet-400 font-semibold mb-5">Capabilities</p>
+          <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none">
+            Technical<br />
+            <span className="gradient-text">Arsenal.</span>
+          </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {SKILL_CATEGORIES.map((category, i) => (
-             <motion.div
-               key={category.title}
-               initial={{ opacity: 0, y: 40 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               transition={{ delay: i * 0.15 }}
-               className="bg-neutral-900/40 border border-white/10 rounded-3xl p-8 backdrop-blur-xl hover:border-white/20 transition-colors shadow-2xl"
-             >
-               <div className={`w-14 h-14 rounded-2xl mb-8 bg-gradient-to-br ${category.color} flex items-center justify-center shadow-lg`}>
-                  <category.Icon className="w-7 h-7 text-white" />
-               </div>
-               <h3 className="text-2xl font-semibold mb-6 text-white">{category.title}</h3>
-               <div className="flex flex-wrap gap-2">
-                 {category.skills.map((skill) => (
-                   <span key={skill.name} className="px-3 py-1.5 bg-white/5 rounded-full text-sm text-neutral-200 font-medium border border-white/10 flex items-center gap-2 hover:bg-white/10 transition-colors">
-                     <skill.icon className="w-4 h-4 text-neutral-400" />
-                     {skill.name}
-                   </span>
-                 ))}
-               </div>
-             </motion.div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {CATEGORIES.map((cat, i) => (
+            <SkillCard key={cat.title} cat={cat} i={i} />
           ))}
         </div>
       </div>

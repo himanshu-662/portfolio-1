@@ -1,91 +1,121 @@
-"use client";
-
 import { motion } from "framer-motion";
+
+const EXPERIENCE = [
+  {
+    role: "Associate Product Manager Intern",
+    company: "Margam - Study Abroad",
+    type: "On-site",
+    period: "June 2025 – Present",
+    quote: "Led the development of AI-driven solutions for study abroad workflows, boosting operational efficiency.",
+    bullets: [
+      {
+        title: "Built & Deployed Margam AI",
+        body: "Engineered an LLM-powered assistant (currently in testing) to automate student guidance, minimising manual overhead and redesigning internal workflows.",
+      },
+      {
+        title: "Drove Product Strategy",
+        body: "Authored comprehensive PRDs and collaborated directly with engineering teams to ensure rapid, user-centric feature delivery.",
+      },
+    ],
+    dotColor: "bg-indigo-500",
+    dotShadow: "0 0 15px rgba(99,102,241,0.8)",
+    accent: "text-indigo-400",
+  },
+  {
+    role: "YouTube Content Creator",
+    company: "dms ai edu tech",
+    type: "Self-directed",
+    period: "Sep 2023 – Present",
+    quote: "Built and grew an engaged audience through a consistent, value-driven content strategy simplifying complex academic concepts.",
+    bullets: [
+      {
+        title: "Community Engine",
+        body: "Organically grew the channel to 20,000+ subscribers, generating 5M+ total views by delivering high-impact technological insights and trend updates.",
+      },
+      {
+        title: "Digital Education & Mentorship",
+        body: "Educated and directly mentored 1,000+ students, accelerating academic performance by breaking down technical engineering concepts.",
+      },
+    ],
+    dotColor: "bg-red-500",
+    dotShadow: "0 0 15px rgba(239,68,68,0.8)",
+    accent: "text-red-400",
+  },
+];
 
 export default function Experience() {
   return (
-    <section className="bg-[#121212] text-white py-32 px-6 md:px-16 border-t border-white/5 relative z-20">
-      <div className="max-w-4xl mx-auto">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+    <section className="relative bg-[#0a0a0a] text-white py-36 px-6 md:px-16 border-t border-white/5">
+      {/* Ambient */}
+      <div className="absolute bottom-0 left-0 w-[600px] h-[400px] bg-indigo-700/8 blur-[140px] pointer-events-none" />
+
+      <div className="max-w-4xl mx-auto relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-20"
+          transition={{ duration: 0.8 }}
+          className="mb-24"
         >
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">Experience</h2>
-          <div className="w-24 h-1 bg-blue-500 rounded-full" />
+          <p className="text-xs tracking-widest uppercase text-indigo-400 font-semibold mb-5">Career</p>
+          <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none">
+            Experience.
+          </h2>
         </motion.div>
 
-        <div className="relative border-l border-white/10 pl-8 md:pl-12 py-4 space-y-24">
-          
-          {/* Role 1: Product Manager */}
-          <motion.div
-             initial={{ opacity: 0, x: -30 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
-             transition={{ duration: 0.6 }}
-             className="relative"
-          >
-            {/* Timeline Dot */}
-            <div className="absolute w-4 h-4 rounded-full bg-blue-500 -left-[41px] md:-left-[57px] top-2 shadow-[0_0_15px_rgba(59,130,246,0.8)]" />
+        {/* Timeline */}
+        <div className="relative pl-6 md:pl-10">
+          {/* Line */}
+          <div className="absolute left-0 top-2 bottom-0 w-px bg-gradient-to-b from-white/20 via-white/10 to-transparent" />
 
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
-              <h3 className="text-3xl font-bold text-white">Associate Product Manager Intern</h3>
-              <span className="text-neutral-500 font-medium text-sm mt-2 sm:mt-0">June 2025 – Present</span>
-            </div>
-            
-            <p className="text-xl text-blue-400 font-medium mb-6">Margam - Study abroad (On-site)</p>
-            
-            <p className="text-lg text-neutral-300 mb-8 font-light italic border-l-2 border-neutral-700 pl-4">
-              "Led the development of AI-driven solutions for study abroad workflows, identifying inefficiencies and boosting operational efficiency."
-            </p>
+          <div className="space-y-20">
+            {EXPERIENCE.map((exp, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                className="relative"
+              >
+                {/* Timeline dot */}
+                <div
+                  className={`absolute -left-[25px] md:-left-[41px] top-1.5 w-3 h-3 rounded-full ${exp.dotColor}`}
+                  style={{ boxShadow: exp.dotShadow }}
+                />
 
-            <ul className="space-y-6">
-              <li className="bg-neutral-900/40 p-6 rounded-2xl border border-white/5 backdrop-blur-sm">
-                <h4 className="text-xl font-semibold mb-2 text-white">Built & Deployed Margam AI</h4>
-                <p className="text-neutral-400 font-light text-sm md:text-base">Engineered an LLM-powered assistant (currently in testing) to automate student guidance, minimizing manual overhead and redesigning internal workflows.</p>
-              </li>
-              <li className="bg-neutral-900/40 p-6 rounded-2xl border border-white/5 backdrop-blur-sm">
-                <h4 className="text-xl font-semibold mb-2 text-white">Drove Product Strategy</h4>
-                <p className="text-neutral-400 font-light text-sm md:text-base">Authored comprehensive PRDs and collaborated directly with engineering teams to ensure rapid, user-centric feature delivery.</p>
-              </li>
-            </ul>
-          </motion.div>
+                {/* Role header */}
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">{exp.role}</h3>
+                    <p className={`text-base font-medium mt-1 ${exp.accent}`}>{exp.company}
+                      <span className="text-white/30 font-normal ml-2">· {exp.type}</span>
+                    </p>
+                  </div>
+                  <span className="text-sm text-white/30 font-medium shrink-0 mt-1 sm:mt-0.5 tabular-nums">{exp.period}</span>
+                </div>
 
-          {/* Role 2: YouTube Creator */}
-          <motion.div
-             initial={{ opacity: 0, x: -30 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
-             transition={{ duration: 0.6 }}
-             className="relative"
-          >
-            {/* Timeline Dot */}
-            <div className="absolute w-4 h-4 rounded-full bg-red-500 -left-[41px] md:-left-[57px] top-2 shadow-[0_0_15px_rgba(239,68,68,0.8)]" />
+                {/* Quote */}
+                <blockquote className="text-base text-white/50 italic border-l-2 border-white/10 pl-4 py-1 mb-8 font-light leading-relaxed">
+                  "{exp.quote}"
+                </blockquote>
 
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
-              <h3 className="text-3xl font-bold text-white">YouTube Content Creator</h3>
-              <span className="text-neutral-500 font-medium text-sm mt-2 sm:mt-0">September 2023 – Present</span>
-            </div>
-            
-            <p className="text-xl text-red-500 font-medium mb-6">Channel: dms ai edu tech</p>
-            
-            <p className="text-lg text-neutral-300 mb-8 font-light italic border-l-2 border-neutral-700 pl-4">
-              "Built and grew an engaged audience through a consistent, value-driven content strategy, simplifying complex academic concepts."
-            </p>
-
-            <ul className="space-y-6">
-              <li className="bg-neutral-900/40 p-6 rounded-2xl border border-white/5 backdrop-blur-sm">
-                <h4 className="text-xl font-semibold mb-2 text-white">Community Engine</h4>
-                <p className="text-neutral-400 font-light text-sm md:text-base">Organically grew the channel to over 20,000+ subscribers, generating 5M+ total views by delivering high-impact technological insights and trend updates.</p>
-              </li>
-              <li className="bg-neutral-900/40 p-6 rounded-2xl border border-white/5 backdrop-blur-sm">
-                <h4 className="text-xl font-semibold mb-2 text-white">Digital Education & Mentorship</h4>
-                <p className="text-neutral-400 font-light text-sm md:text-base">Educated and directly mentored 1000+ students, accelerating their academic performance by breaking down technical engineering concepts.</p>
-              </li>
-            </ul>
-          </motion.div>
-
+                {/* Bullets */}
+                <ul className="space-y-4">
+                  {exp.bullets.map((b, j) => (
+                    <li
+                      key={j}
+                      className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 backdrop-blur-md hover:border-white/10 transition-colors"
+                    >
+                      <h4 className="text-base font-semibold text-white mb-1.5">{b.title}</h4>
+                      <p className="text-sm text-white/50 font-light leading-relaxed">{b.body}</p>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
