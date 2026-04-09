@@ -13,7 +13,7 @@ const VIDEOS = [
   {
     id: 2,
     title: "How to pass JAVA",
-    img: "https://i9.ytimg.com/vi/jqOsLqwQEJ4/mqdefault.jpg?v=65cc8289&sqp=CJjj3c4G&rs=AOn4CLCWmL0GDIoSi0T58olIqJqZijMhdg",
+    img: "https://i9.ytimg.com/vi/jqOsLqwQEJ4/mqdefault.jpg?v=65cc8289&sqp=CLSq384G&rs=AOn4CLCB-So1JXpHwZs8CkFKiVXMPepzIA",
     link: "https://youtu.be/jqOsLqwQEJ4",
     views: "110K views",
   },
