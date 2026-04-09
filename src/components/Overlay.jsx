@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { useRef } from "react";
 
 const SOCIAL = [
@@ -38,21 +38,35 @@ const SOCIAL = [
 export default function Overlay() {
   const containerRef = useRef(null);
 
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "start end"],
+  });
+
   return (
     <>
+      {/* Full-screen gradient blur overlay that fades with scroll */}
+      {/* <motion.div
+        style={{
+          opacity: scrollYProgress.to((value) => Math.max(0, 1 - value * 2)), // Fade out with content
+        }}
+        className="fixed inset-0 z-0 pointer-events-none"
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-transparent" />
+        <div className="absolute inset-0 backdrop-blur-[0.5px]" />
+      </motion.div> */}
+
       {/* ─── SCENE 1: Hero (top: 0vh) ─── */}
       <div
         ref={containerRef}
         className="absolute top-0 left-0 w-full h-screen flex flex-col justify-center items-center px-6 md:px-16 pointer-events-none z-10"
       >
-        {/* Subtle top gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/60 via-transparent to-transparent -z-10" />
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center max-w-5xl"
+          className="text-center max-w-5xl relative"
         >
           {/* Eyebrow */}
           <motion.div

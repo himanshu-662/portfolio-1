@@ -147,6 +147,17 @@ export default function Projects() {
             <ProjectCard key={p.id} project={p} i={i} />
           ))}
         </div>
+
+        <div className="mt-14 flex justify-center">
+          <a
+            href="https://github.com/himanshu-662"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-7 py-3 rounded-full border border-white/10 bg-white/5 text-sm font-semibold text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+          >
+            View More
+          </a>
+        </div>
       </div>
     </section>
   );

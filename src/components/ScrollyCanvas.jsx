@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { useScroll, useMotionValueEvent, motion, useTransform } from "framer-motion";
+import { useScroll, useMotionValueEvent } from "framer-motion";
 
 const FRAME_COUNT = 120;
 
 function getFrameUrl(index) {
   const padded = String(index).padStart(3, "0");
-  return `/sequence/frame_${padded}_delay-0.066s.jpg`;
+  return `${import.meta.env.BASE_URL}sequence/frame_${padded}_delay-0.066s.jpg`;
 }
 
 export default function ScrollyCanvas({ children }) {
@@ -14,34 +14,25 @@ export default function ScrollyCanvas({ children }) {
   const imagesRef = useRef([]);
   const [ready, setReady] = useState(false);
   const rafRef = useRef(null);
-  const currentFrameRef = useRef(0);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // Smooth scroll progress indicator at bottom of sticky viewport
-  const lineScaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
-  /* ─────────────────────────────────────────
-     Draw a single frame onto the canvas
-  ───────────────────────────────────────── */
   const drawFrame = useCallback((image) => {
     if (!image || !image.complete || image.naturalWidth === 0) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d", { alpha: false });
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
-    const W = rect.width;
-    const H = rect.height;
 
-    // Resize only when needed
-    const targetW = Math.floor(W * dpr);
-    const targetH = Math.floor(H * dpr);
+    const targetW = Math.floor(rect.width * dpr);
+    const targetH = Math.floor(rect.height * dpr);
+
     if (canvas.width !== targetW || canvas.height !== targetH) {
       canvas.width = targetW;
       canvas.height = targetH;
@@ -49,201 +40,107 @@ export default function ScrollyCanvas({ children }) {
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    // object-fit: cover
+    // object-fit: cover math
+    const cw = rect.width;
+    const ch = rect.height;
     const iw = image.naturalWidth;
     const ih = image.naturalHeight;
-    const scale = Math.max(W / iw, H / ih);
-    const dx = (W - iw * scale) / 2;
-    const dy = (H - ih * scale) / 2;
+    const scale = Math.max(cw / iw, ch / ih);
+    const dx = (cw - iw * scale) / 2;
+    const dy = (ch - ih * scale) / 2;
 
+    ctx.clearRect(0, 0, cw, ch);
     ctx.drawImage(image, dx, dy, iw * scale, ih * scale);
   }, []);
 
-  /* ─────────────────────────────────────────
-     Preload all frames — show as soon as
-     FIRST frame is decoded, don't wait for all
-  ───────────────────────────────────────── */
+  // Preload all frames
   useEffect(() => {
-    const imgs = new Array(FRAME_COUNT);
-    let firstReady = false;
-
-    for (let i = 0; i < FRAME_COUNT; i++) {
-      const img = new Image();
-      img.decoding = "async";
-      img.src = getFrameUrl(i);
-
-      img.addEventListener("load", () => {
-        if (i === 0 && !firstReady) {
-          firstReady = true;
-          requestAnimationFrame(() => {
+    const imgs = [];
+    const preloadBatch = (startIdx, batchSize) => {
+      const end = Math.min(startIdx + batchSize, FRAME_COUNT);
+      for (let i = startIdx; i < end; i++) {
+        const img = new Image();
+        img.src = getFrameUrl(i);
+        img.onload = () => {
+          if (i === 0) {
             drawFrame(img);
             setReady(true);
-          });
-        }
-      });
-
-      // Even if it errors, we still mark it so onerror doesn't hang
-      img.addEventListener("error", () => {
-        /* silent — partial sequence is fine */
-      });
-
-      imgs[i] = img;
-    }
-
+          }
+        };
+        img.onerror = () => {
+          // allow graceful degradation
+        };
+        imgs.push(img);
+      }
+      if (end < FRAME_COUNT) {
+        // Load next batch after a short delay so first frames render fast
+        setTimeout(() => preloadBatch(end, batchSize), 100);
+      }
+    };
+    // Load first 10 frames immediately, then rest in batches
+    preloadBatch(0, 10);
     imagesRef.current = imgs;
 
-    // Safety fallback: show UI after 2s regardless
-    const t = setTimeout(() => setReady(true), 2000);
-    return () => clearTimeout(t);
+    // Fallback reveal
+    const fallback = setTimeout(() => setReady(true), 2000);
+    return () => clearTimeout(fallback);
   }, [drawFrame]);
 
-  /* ─────────────────────────────────────────
-     Map scroll progress → frame index
-  ───────────────────────────────────────── */
+  // Sync scroll progress → frame
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const imgs = imagesRef.current;
     if (!imgs.length) return;
-
     const idx = Math.min(FRAME_COUNT - 1, Math.max(0, Math.floor(latest * (FRAME_COUNT - 1))));
-    if (idx === currentFrameRef.current) return; // same frame, skip draw
-    currentFrameRef.current = idx;
-
     const img = imgs[idx];
-    if (!img) return;
-
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
     rafRef.current = requestAnimationFrame(() => drawFrame(img));
   });
 
-  /* ─────────────────────────────────────────
-     Redraw on window resize
-  ───────────────────────────────────────── */
+  // Resize
   useEffect(() => {
-    const onResize = () => {
-      const idx = currentFrameRef.current;
-      const img = imagesRef.current[idx];
-      if (img?.complete) drawFrame(img);
+    const handleResize = () => {
+      const progress = scrollYProgress.get();
+      const idx = Math.min(FRAME_COUNT - 1, Math.max(0, Math.floor(progress * (FRAME_COUNT - 1))));
+      drawFrame(imagesRef.current[idx]);
     };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [drawFrame]);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [drawFrame, scrollYProgress]);
 
   return (
-    <div
-      ref={containerRef}
-      style={{ height: "500vh", background: "#0a0a0a", position: "relative", width: "100%" }}
-    >
-      {/* Loading screen — fades out once first frame is drawn */}
+    <div ref={containerRef} className="h-[500vh] w-full relative" style={{ background: "#0a0a0a" }}>
+
+      {/* Loading overlay — fades out once first frame is ready */}
       <div
+        className="fixed inset-0 bg-[#0a0a0a] z-50 flex items-center justify-center"
         style={{
-          position: "fixed",
-          inset: 0,
-          background: "#0a0a0a",
-          zIndex: 100,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          gap: "1.25rem",
           opacity: ready ? 0 : 1,
           pointerEvents: ready ? "none" : "all",
-          transition: "opacity 0.6s ease",
+          transition: "opacity 0.8s ease",
         }}
       >
-        <div
-          style={{
-            width: 36,
-            height: 36,
-            borderRadius: "50%",
-            border: "2px solid rgba(255,255,255,0.15)",
-            borderTopColor: "rgba(255,255,255,0.8)",
-            animation: "spin 0.8s linear infinite",
-          }}
-        />
-        <p style={{ color: "rgba(255,255,255,0.25)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase" }}>
-          Loading
-        </p>
-        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-      </div>
-
-      {/* ── Sticky viewport ── */}
-      <div
-        style={{
-          position: "sticky",
-          top: 0,
-          height: "100vh",
-          width: "100%",
-          overflow: "hidden",
-        }}
-      >
-        {/* Canvas fills the entire sticky viewport */}
-        <canvas
-          ref={canvasRef}
-          style={{ display: "block", width: "100%", height: "100%", background: "#0a0a0a" }}
-        />
-
-        {/* ── Cinematic overlays on top of canvas ── */}
-        {/* Radial vignette - darkens edges */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.72) 100%)",
-            pointerEvents: "none",
-            zIndex: 2,
-          }}
-        />
-        {/* Bottom fade — blends into the next section */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "220px",
-            background: "linear-gradient(to bottom, transparent, #0a0a0a)",
-            pointerEvents: "none",
-            zIndex: 3,
-          }}
-        />
-        {/* Top gradient */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "160px",
-            background: "linear-gradient(to bottom, rgba(10,10,10,0.5), transparent)",
-            pointerEvents: "none",
-            zIndex: 3,
-          }}
-        />
-
-        {/* ── Scroll progress bar ── */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "1px",
-            background: "rgba(255,255,255,0.06)",
-            zIndex: 10,
-          }}
-        >
-          <motion.div
-            style={{
-              height: "100%",
-              background: "linear-gradient(90deg, #6366f1, #34d399)",
-              scaleX: lineScaleX,
-              transformOrigin: "left",
-            }}
-          />
+        <div className="flex flex-col items-center gap-5">
+          <div className="w-10 h-10 border-2 border-white/20 border-t-white/80 rounded-full animate-spin" />
+          <p className="text-white/30 text-xs tracking-widest uppercase">Loading</p>
         </div>
       </div>
 
-      {/* ── Text overlay scenes — absolute within the 500vh space ── */}
+      {/* Sticky viewport — the canvas lives here */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* Canvas — full-screen image sequence */}
+        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full block" />
+
+        {/* Subtle dark overlay so text is readable — NOT blocking the image */}
+        <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+
+        {/* Bottom fade into next section */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-56 pointer-events-none"
+          style={{ background: "linear-gradient(to top, #0a0a0a 0%, transparent 100%)" }}
+        />
+      </div>
+
+      {/* Scrollytelling text overlays — positioned absolutely within 500vh space */}
       {children}
     </div>
   );
