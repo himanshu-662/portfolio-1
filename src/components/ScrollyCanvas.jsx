@@ -3,24 +3,24 @@
 import { useEffect, useRef, useState } from "react";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 
-function getCurrentFrame(index: number) {
+function getCurrentFrame(index) {
   const paddedIndex = String(index).padStart(3, "0");
   return `/sequence/frame_${paddedIndex}_delay-0.066s.jpg`;
 }
 
-export default function ScrollyCanvas({ children }: { children?: React.ReactNode }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+export default function ScrollyCanvas({ children }) {
+  const containerRef = useRef(null);
+  const canvasRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
   
-  const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const [images, setImages] = useState([]);
   
   // Preload images
   useEffect(() => {
-    const loadedImages: HTMLImageElement[] = [];
+    const loadedImages = [];
     for (let i = 0; i < 120; i++) {
       const img = new Image();
       img.src = getCurrentFrame(i);
@@ -36,7 +36,7 @@ export default function ScrollyCanvas({ children }: { children?: React.ReactNode
     }
   }, []);
 
-  const drawFrame = (image: HTMLImageElement) => {
+  const drawFrame = (image) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
