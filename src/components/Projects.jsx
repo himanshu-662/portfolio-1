@@ -7,9 +7,10 @@ const PROJECTS = [
     id: 1,
     title: "DMS AI EduTech",
     description: "Developed a full-featured educational web platform as a single-file HTML/CSS/JS application featuring a responsive design, navigation, and dynamic content rendering.",
-    img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1200",
+    img: BASE_URL + "dmsaiedu.png",
     color: "from-red-600/20 to-orange-600/10",
     borderColor: "border-red-500/20",
+    demoLink: "https://www.dmsaiedu.tech",
   },
   {
     id: 2,
