@@ -19,6 +19,7 @@ const PROJECTS = [
     img: BASE_URL + "DMS-HRMS.png",
     color: "from-purple-600/20 to-fuchsia-600/10",
     borderColor: "border-purple-500/20",
+    demoLink: "https://dms-hrms.vercel.app/",
   },
   {
     id: 3,
