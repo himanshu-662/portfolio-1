@@ -14,6 +14,14 @@ const PROJECTS = [
   },
   {
     id: 2,
+    title: "Multi-tenant HRMS Platform",
+    description: "Built a multi-tenant HRMS platform with secure role-based access control, interactive dashboards, and complete modules for attendance, leave, payroll, analytics, and employee management.",
+    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200",
+    color: "from-purple-600/20 to-fuchsia-600/10",
+    borderColor: "border-purple-500/20",
+  },
+  {
+    id: 3,
     title: "Margam AI",
     description: "LLM-powered study abroad assistant with intelligent guidance and action planning.",
     img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200",
@@ -22,7 +30,7 @@ const PROJECTS = [
     demoLink: "https://ai.yourmargam.com/",
   },
   {
-    id: 3,
+    id: 4,
     title: "Restaurant Platform",
     description: "Fast, conversion-focused restaurant UI built with premium animations and modern layout.",
     img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1200",
@@ -31,7 +39,7 @@ const PROJECTS = [
     demoLink: "https://himanshu-662.github.io/restaurant-landing/",
   },
   {
-    id: 4,
+    id: 5,
     title: "Study Abroad Funnel",
     description: "High-intent acquisition funnel designed for clarity, lead conversion, and engagement.",
     img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1200",
@@ -40,7 +48,7 @@ const PROJECTS = [
     demoLink: "https://cyan-beaver-592842.hostingersite.com/",
   },
   {
-    id: 5,
+    id: 6,
     title: "Personal Portfolio",
     description: "Modern developer portfolio experience with fast animations, product highlights, and lead capture.",
     img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200",
