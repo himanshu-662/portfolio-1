@@ -5,6 +5,14 @@ const BASE_URL = import.meta.env.BASE_URL;
 const PROJECTS = [
   {
     id: 1,
+    title: "DMS AI EduTech",
+    description: "Developed a full-featured educational web platform as a single-file HTML/CSS/JS application featuring a responsive design, navigation, and dynamic content rendering.",
+    img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1200",
+    color: "from-red-600/20 to-orange-600/10",
+    borderColor: "border-red-500/20",
+  },
+  {
+    id: 2,
     title: "Margam AI",
     description: "LLM-powered study abroad assistant with intelligent guidance and action planning.",
     img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200",
@@ -13,7 +21,7 @@ const PROJECTS = [
     demoLink: "https://ai.yourmargam.com/",
   },
   {
-    id: 2,
+    id: 3,
     title: "Restaurant Platform",
     description: "Fast, conversion-focused restaurant UI built with premium animations and modern layout.",
     img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1200",
@@ -22,7 +30,7 @@ const PROJECTS = [
     demoLink: "https://himanshu-662.github.io/restaurant-landing/",
   },
   {
-    id: 3,
+    id: 4,
     title: "Study Abroad Funnel",
     description: "High-intent acquisition funnel designed for clarity, lead conversion, and engagement.",
     img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1200",
@@ -31,7 +39,7 @@ const PROJECTS = [
     demoLink: "https://cyan-beaver-592842.hostingersite.com/",
   },
   {
-    id: 4,
+    id: 5,
     title: "Personal Portfolio",
     description: "Modern developer portfolio experience with fast animations, product highlights, and lead capture.",
     img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200",
@@ -48,10 +56,10 @@ function ProjectCard({ project, i }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ delay: i * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className={`group relative flex flex-col rounded-[2rem] overflow-hidden border border-white/10 ${project.borderColor} bg-gradient-to-br ${project.color} backdrop-blur-xl shadow-[0_20px_80px_-40px_rgba(15,23,42,0.65)] transition-all duration-500 hover:-translate-y-1`}
+      className={`group relative flex flex-col rounded-2xl overflow-hidden border border-white/10 ${project.borderColor} bg-gradient-to-br ${project.color} backdrop-blur-xl shadow-[0_20px_80px_-40px_rgba(15,23,42,0.65)] transition-all duration-500 hover:-translate-y-1`}
     >
       {/* Image */}
-      <div className="relative w-full aspect-[5/4] overflow-hidden">
+      <div className="relative w-full aspect-[16/10] overflow-hidden">
         <div className="absolute inset-0 bg-[#0a0a0a] animate-pulse" />
         <img
           src={project.img}
@@ -63,10 +71,10 @@ function ProjectCard({ project, i }) {
       </div>
 
       {/* Body */}
-      <div className="flex flex-col flex-grow p-7 gap-4">
+      <div className="flex flex-col flex-grow p-5 gap-3.5">
         <div>
-          <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
-          <p className="text-sm text-white/70 leading-relaxed">{project.description}</p>
+          <h3 className="text-xl font-bold text-white mb-1.5">{project.title}</h3>
+          <p className="text-[13px] text-white/60 leading-relaxed">{project.description}</p>
         </div>
 
         {project.demoLink && (
@@ -75,7 +83,7 @@ function ProjectCard({ project, i }) {
               href={project.demoLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-full px-4 py-3 rounded-full bg-white/10 text-sm font-semibold text-white border border-white/10 hover:bg-white/15 transition-colors duration-300"
+              className="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-full bg-white/10 text-xs font-semibold text-white border border-white/10 hover:bg-white/15 transition-colors duration-300"
             >
               View Live Demo
             </a>
@@ -106,13 +114,12 @@ export default function Projects() {
         >
           <p className="text-xs tracking-widest uppercase text-indigo-400 font-semibold mb-5">Work</p>
           <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none">
-            Selected<br />
-            <span className="gradient-text">Projects.</span>
+            Selected <span className="gradient-text">Projects.</span>
           </h2>
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {PROJECTS.map((p, i) => (
             <ProjectCard key={p.id} project={p} i={i} />
           ))}

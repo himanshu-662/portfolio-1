@@ -4,7 +4,9 @@ import {
   Code, Wind, FileCode, Server, Database, Monitor,
   FileText, Map, Users, RefreshCcw, TrendingUp,
   GitBranch, Zap, PenTool, Layout, Book, CheckSquare,
-  Send, GitPullRequest, Box, Terminal, Settings
+  Send, GitPullRequest, Box, Terminal, Settings,
+  Sparkles, Cpu, Smartphone, Layers, Shield, Calendar,
+  DollarSign, LineChart
 } from "lucide-react";
 
 const CATEGORIES = [
@@ -12,61 +14,103 @@ const CATEGORIES = [
     title: "AI & Machine Learning",
     desc: "Building intelligent systems that learn and adapt.",
     skills: [
+      { name: "Python", icon: FileCode },
       { name: "Generative AI", icon: Brain },
-      { name: "LLMs", icon: MessageSquare },
+      { name: "LLM Applications", icon: MessageSquare },
       { name: "LangChain", icon: Link },
       { name: "NLP", icon: Globe },
+      { name: "LLM APIs", icon: Cpu },
+      { name: "Structured Prompt Engineering", icon: Settings },
       { name: "AI Automation", icon: Bot },
+      { name: "AI-driven Solutions", icon: Sparkles },
     ],
     gradient: "from-violet-500 to-indigo-500",
     glow: "rgba(139,92,246,0.15)",
     Icon: Brain,
   },
   {
-    title: "Web Development",
-    desc: "Crafting fast, beautiful, production-grade interfaces.",
+    title: "Web Development & Frontend",
+    desc: "Crafting fast, beautiful, responsive, and interactive interfaces.",
     skills: [
+      { name: "HTML", icon: Code },
+      { name: "CSS", icon: Wind },
+      { name: "JavaScript", icon: FileCode },
       { name: "React.js", icon: Code },
       { name: "Tailwind CSS", icon: Wind },
-      { name: "JavaScript", icon: FileCode },
-      { name: "FastAPI & Python", icon: Server },
-      { name: "MongoDB", icon: Database },
       { name: "WordPress", icon: Monitor },
+      { name: "Elementor", icon: Layout },
+      { name: "UI/UX Design", icon: PenTool },
+      { name: "Mobile-First Development", icon: Smartphone },
+      { name: "UI Interactions", icon: Zap },
     ],
     gradient: "from-emerald-500 to-teal-500",
     glow: "rgba(52,211,153,0.12)",
     Icon: Code,
   },
   {
-    title: "Product Strategy",
-    desc: "Translating user research into shipping roadmaps.",
+    title: "Backend & Databases",
+    desc: "Powering applications with robust APIs and structured databases.",
+    skills: [
+      { name: "Python", icon: FileCode },
+      { name: "FastAPI", icon: Server },
+      { name: "MongoDB", icon: Database },
+      { name: "Supabase", icon: Database },
+      { name: "Firebase", icon: Database },
+    ],
+    gradient: "from-blue-500 to-cyan-500",
+    glow: "rgba(59,130,246,0.12)",
+    Icon: Server,
+  },
+  {
+    title: "Product Management & Strategy",
+    desc: "Translating user insights and market research into successful products.",
     skills: [
       { name: "PRDs", icon: FileText },
       { name: "Roadmapping", icon: Map },
       { name: "User Research", icon: Users },
       { name: "Agile/Scrum", icon: RefreshCcw },
       { name: "KPI Tracking", icon: TrendingUp },
+      { name: "Market Research", icon: Globe },
+      { name: "Product Strategy", icon: Box },
     ],
     gradient: "from-rose-500 to-pink-500",
     glow: "rgba(244,63,94,0.12)",
     Icon: Box,
   },
   {
-    title: "Tools & Platforms",
+    title: "Automation & Workflow Tools",
     desc: "Automating workflows and shipping with precision.",
     skills: [
       { name: "n8n", icon: GitBranch },
       { name: "Make.com", icon: Zap },
       { name: "Zapier", icon: Settings },
       { name: "Figma", icon: PenTool },
+      { name: "Framer", icon: Layout },
       { name: "Notion", icon: Book },
-      { name: "Git/GitHub", icon: GitPullRequest },
       { name: "Jira", icon: CheckSquare },
       { name: "Postman", icon: Send },
+      { name: "Git", icon: GitBranch },
+      { name: "GitHub", icon: GitPullRequest },
     ],
     gradient: "from-amber-500 to-orange-500",
     glow: "rgba(245,158,11,0.12)",
     Icon: Terminal,
+  },
+  {
+    title: "Enterprise Systems & HRIS",
+    desc: "Designing secure employee architectures and payroll workflows.",
+    skills: [
+      { name: "Multi-tenant Architecture", icon: Layers },
+      { name: "Role-Based Access Control", icon: Shield },
+      { name: "Attendance Management", icon: Calendar },
+      { name: "Leave Management", icon: Calendar },
+      { name: "Payroll Workflows", icon: DollarSign },
+      { name: "HR Analytics", icon: LineChart },
+      { name: "Employee Management", icon: Users },
+    ],
+    gradient: "from-purple-500 to-fuchsia-500",
+    glow: "rgba(168,85,247,0.15)",
+    Icon: Shield,
   },
 ];
 
@@ -77,28 +121,28 @@ function SkillCard({ cat, i }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative rounded-3xl p-7 border border-white/5 bg-white/[0.03] backdrop-blur-xl transition-all duration-500 overflow-hidden hover:border-white/10 hover:-translate-y-1"
+      className="group relative rounded-2xl p-5 border border-white/5 bg-white/[0.03] backdrop-blur-xl transition-all duration-500 overflow-hidden hover:border-white/10 hover:-translate-y-1"
       style={{ boxShadow: `0 0 0 0 ${cat.glow}` }}
     >
       {/* Hover glow */}
       <div
-        className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         style={{ background: `radial-gradient(circle at 50% 0%, ${cat.glow}, transparent 70%)` }}
       />
 
       {/* Icon */}
-      <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center mb-6 shadow-lg`}>
-        <cat.Icon className="w-6 h-6 text-white" strokeWidth={1.5} />
+      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center mb-4 shadow-lg`}>
+        <cat.Icon className="w-5 h-5 text-white" strokeWidth={1.5} />
       </div>
 
-      <h3 className="text-xl font-bold text-white mb-1.5">{cat.title}</h3>
-      <p className="text-white/40 text-sm font-light mb-6 leading-relaxed">{cat.desc}</p>
+      <h3 className="text-lg font-bold text-white mb-1">{cat.title}</h3>
+      <p className="text-white/40 text-xs font-light mb-4 leading-relaxed">{cat.desc}</p>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5">
         {cat.skills.map((skill) => (
           <span
             key={skill.name}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/8 text-xs text-white/60 font-medium hover:bg-white/10 transition-colors cursor-default"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/8 text-[11px] text-white/60 font-medium hover:bg-white/10 transition-colors cursor-default"
           >
             <skill.icon className="w-3 h-3" strokeWidth={1.5} />
             {skill.name}
@@ -125,12 +169,11 @@ export default function Skills() {
         >
           <p className="text-xs tracking-widest uppercase text-violet-400 font-semibold mb-5">Capabilities</p>
           <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-white leading-none">
-            Technical<br />
-            <span className="gradient-text">Arsenal.</span>
+            Technical <span className="gradient-text">Arsenal.</span>
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {CATEGORIES.map((cat, i) => (
             <SkillCard key={cat.title} cat={cat} i={i} />
           ))}
