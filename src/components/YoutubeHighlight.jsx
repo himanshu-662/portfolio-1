@@ -13,7 +13,7 @@ const VIDEOS = [
   {
     id: 2,
     title: "How to pass JAVA",
-    img: "https://i9.ytimg.com/vi/jqOsLqwQEJ4/mqdefault.jpg?v=65cc8289&sqp=CLSq384G&rs=AOn4CLCB-So1JXpHwZs8CkFKiVXMPepzIA",
+    img: "https://i9.ytimg.com/vi/jqOsLqwQEJ4/mqdefault.jpg?v=65cc8289&sqp=COCdttUG&rs=AOn4CLA3D9W6HKY3zhIjVWftFtjkGKWKVg",
     link: "https://youtu.be/jqOsLqwQEJ4",
     views: "110K views",
   },
@@ -55,7 +55,7 @@ export default function YoutubeHighlight() {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-white">dms ai edu tech</h3>
-                <p className="text-red-400 text-sm font-medium">20,000+ Subscribers · 5M+ Views</p>
+                <p className="text-red-400 text-sm font-medium">20,000+ Subscribers · 6M+ Views</p>
               </div>
             </div>
 

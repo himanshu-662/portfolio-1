@@ -87,18 +87,26 @@ export default function Overlay() {
             <span className="block gradient-text">Molkapuri.</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-white/50 font-light max-w-xl mx-auto mb-12 leading-relaxed">
-            AI Product Builder · Automation Developer · Content Creator
+          <p className="text-lg md:text-xl text-white/50 font-light max-w-2xl mx-auto mb-12 leading-relaxed">
+            AI/ML Engineer · Generative AI &amp; Agentic Workflows · Content Creator
           </p>
 
           {/* CTA Row */}
-          <div className="flex gap-4 justify-center pointer-events-auto">
+          <div className="flex flex-wrap gap-4 justify-center pointer-events-auto">
             <a
               href="#projects"
               className="group relative px-7 py-3.5 bg-white text-black text-sm font-semibold rounded-full overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]"
             >
               <span className="relative z-10">View Work</span>
               <div className="absolute inset-0 bg-neutral-200 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            </a>
+            <a
+              href={`${import.meta.env.BASE_URL}Himanshu_Resume.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-7 py-3.5 rounded-full text-sm font-semibold text-white border border-white/15 bg-white/5 backdrop-blur-md hover:bg-white/10 hover:border-white/30 transition-all duration-300"
+            >
+              Resume
             </a>
             <a
               href="#contact"
@@ -173,7 +181,7 @@ export default function Overlay() {
             <span className="gradient-text">I build solutions.</span>
           </h2>
           <p className="text-lg md:text-xl text-white/50 font-light leading-relaxed">
-            A Product Builder and Developer specialized in turning complex AI capabilities into functional, market-ready products with measurable impact.
+            AI/ML Engineer with hands-on experience prototyping AI-powered applications, intelligent workflows, and multi-agent systems that solve real-world problems.
           </p>
         </motion.div>
       </div>

@@ -5,17 +5,19 @@ const BASE_URL = import.meta.env.BASE_URL;
 const PROJECTS = [
   {
     id: 1,
-    title: "DMS AI EduTech",
-    description: "Developed a full-featured educational web platform as a single-file HTML/CSS/JS application featuring a responsive design, navigation, and dynamic content rendering.",
-    img: BASE_URL + "dmsaiedu.png",
-    color: "from-red-600/20 to-orange-600/10",
-    borderColor: "border-red-500/20",
-    demoLink: "https://www.dmsaiedu.tech",
+    title: "Margam AI – LLM-Powered Student Assistant",
+    description: "Built an AI-powered student assistant for automating study-abroad guidance and delivering contextual responses to student queries using structured prompts and RAG pipelines.",
+    tech: "Python, LangChain, LLM APIs, RAG Pipelines, Prompt Engineering",
+    img: BASE_URL + "Margam-AI.png",
+    color: "from-violet-600/20 to-indigo-600/10",
+    borderColor: "border-violet-500/20",
+    demoLink: "https://ai.yourmargam.com/",
   },
   {
     id: 2,
-    title: "Multi-tenant HRMS Platform",
-    description: "Built a multi-tenant HRMS platform with secure role-based access control, interactive dashboards, and complete modules for attendance, leave, payroll, analytics, and employee management.",
+    title: "Enterprise AI Intelligence & Automation Platform",
+    description: "Built an end-to-end enterprise platform integrating Data Analytics, SQL, Machine Learning, Deep Learning, NLP, Generative AI, RAG, and Agentic AI workflows for intelligent automation and decision support.",
+    tech: "Transformers, LangChain, LangGraph, LangSmith, Vector DBs, MCP, FastAPI",
     img: BASE_URL + "DMS-HRMS.png",
     color: "from-purple-600/20 to-fuchsia-600/10",
     borderColor: "border-purple-500/20",
@@ -23,39 +25,43 @@ const PROJECTS = [
   },
   {
     id: 3,
-    title: "Margam AI",
-    description: "LLM-powered study abroad assistant with intelligent guidance and action planning.",
-    img: BASE_URL + "Margam-AI.png",
-    color: "from-violet-600/20 to-indigo-600/10",
-    borderColor: "border-violet-500/20",
-    demoLink: "https://ai.yourmargam.com/",
+    title: "DMS AI EduTech",
+    description: "Educational web platform delivering technical engineering education, resources, and mentorship to 2,000+ students.",
+    tech: "JavaScript, HTML5, CSS3, Video Integration",
+    img: BASE_URL + "dmsaiedu.png",
+    color: "from-red-600/20 to-orange-600/10",
+    borderColor: "border-red-500/20",
+    demoLink: "https://www.dmsaiedu.tech",
   },
   {
     id: 4,
-    title: "Restaurant Platform",
-    description: "Fast, conversion-focused restaurant UI built with premium animations and modern layout.",
-    img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1200",
-    color: "from-emerald-600/20 to-teal-600/10",
-    borderColor: "border-emerald-500/20",
-    demoLink: "https://himanshu-662.github.io/restaurant-landing/",
-  },
-  {
-    id: 5,
     title: "Study Abroad Funnel",
-    description: "High-intent acquisition funnel designed for clarity, lead conversion, and engagement.",
+    description: "High-intent student acquisition funnel designed for clarity, lead conversion, and seamless onboarding.",
+    tech: "WordPress, Elementor, UI/UX Design",
     img: BASE_URL + "Margam-Wensite.png",
     color: "from-amber-600/20 to-orange-600/10",
     borderColor: "border-amber-500/20",
     demoLink: "https://cyan-beaver-592842.hostingersite.com/",
   },
   {
-    id: 6,
-    title: "Personal Portfolio",
-    description: "Modern developer portfolio experience with fast animations, product highlights, and lead capture.",
+    id: 5,
+    title: "Personal Portfolio & Scrollytelling",
+    description: "Interactive scrollytelling portfolio built with React 19, Framer Motion, and Tailwind CSS highlighting AI projects and skills.",
+    tech: "React.js, Tailwind CSS, Framer Motion, Vite",
     img: BASE_URL + "Portfolio.png",
     color: "from-sky-600/20 to-cyan-600/10",
     borderColor: "border-sky-500/20",
     demoLink: BASE_URL,
+  },
+  {
+    id: 6,
+    title: "Restaurant Platform",
+    description: "Fast, conversion-focused responsive restaurant UI built with modern layouts and mobile-first design.",
+    tech: "HTML5, Tailwind CSS, JavaScript",
+    img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1200",
+    color: "from-emerald-600/20 to-teal-600/10",
+    borderColor: "border-emerald-500/20",
+    demoLink: "https://himanshu-662.github.io/restaurant-landing/",
   },
 ];
 
@@ -84,7 +90,12 @@ function ProjectCard({ project, i }) {
       <div className="flex flex-col flex-grow p-5 gap-3.5">
         <div>
           <h3 className="text-xl font-bold text-white mb-1.5">{project.title}</h3>
-          <p className="text-[13px] text-white/60 leading-relaxed">{project.description}</p>
+          <p className="text-[13px] text-white/60 leading-relaxed mb-3">{project.description}</p>
+          {project.tech && (
+            <p className="text-[11px] text-indigo-300/80 font-mono bg-white/[0.04] px-2.5 py-1 rounded-md border border-white/5 inline-block">
+              {project.tech}
+            </p>
+          )}
         </div>
 
         {project.demoLink && (

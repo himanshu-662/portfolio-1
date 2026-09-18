@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 
 const STATS = [
   { value: "20K+", label: "YouTube Subscribers", gradient: "from-red-400 to-rose-600" },
-  { value: "5M+", label: "Global Views", gradient: "from-blue-400 to-indigo-500" },
-  { value: "1K+", label: "Students Mentored", gradient: "from-amber-400 to-orange-500" },
+  { value: "6M+", label: "Global Views", gradient: "from-blue-400 to-indigo-500" },
+  { value: "2K+", label: "Students Mentored", gradient: "from-amber-400 to-orange-500" },
   { value: "B.Tech", label: "Computer Science • AI & ML", gradient: "from-emerald-400 to-teal-500" },
 ];
 
@@ -27,10 +27,10 @@ export default function Achievements() {
                 transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="glass rounded-3xl p-8 flex flex-col items-center justify-center text-center aspect-square hover:border-white/15 transition-colors"
               >
-                <h3 className={`text-4xl md:text-5xl font-black bg-gradient-to-br ${stat.gradient} bg-clip-text text-transparent mb-2 tracking-tighter`}>
+                <h3 className={`text-3xl sm:text-4xl md:text-5xl font-black bg-gradient-to-br ${stat.gradient} bg-clip-text text-transparent mb-2 tracking-tighter`}>
                   {stat.value}
                 </h3>
-                <p className="text-white/40 text-sm font-medium leading-snug">{stat.label}</p>
+                <p className="text-white/40 text-xs sm:text-sm font-medium leading-snug">{stat.label}</p>
               </motion.div>
             ))}
           </div>
@@ -43,17 +43,25 @@ export default function Achievements() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="w-full lg:w-1/2"
           >
-            <p className="text-xs tracking-widest uppercase text-red-400 font-semibold mb-5">Impact</p>
+            <p className="text-xs tracking-widest uppercase text-amber-400 font-semibold mb-5">Milestones &amp; Recognition</p>
             <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-white leading-tight mb-8">
-              AI Thought Leadership &amp;{" "}
-              <span className="gradient-text">Digital Education.</span>
+              Validated Impact &amp;{" "}
+              <span className="gradient-text">Leadership.</span>
             </h2>
-            <p className="text-lg text-white/50 font-light leading-relaxed mb-6">
-              I am deeply committed to distilling technological complexity into clarity for the next generation of builders.
-            </p>
-            <p className="text-base text-white/35 font-light leading-relaxed mb-10">
-              I don't just consume trends — I actively teach them. I leverage my platform to simplify product engineering, demystify AI architecture, and mentor emerging technical talent.
-            </p>
+            <div className="space-y-4 mb-10">
+              <div className="p-4 rounded-2xl border border-white/10 bg-white/[0.02]">
+                <h4 className="text-base font-semibold text-white mb-1">2nd Prize Winner – Student Community Presentation Challenge</h4>
+                <p className="text-sm text-white/50 font-light leading-relaxed">
+                  Represented Margam AI and pitched its vision as an AI Pre-Counsellor for study-abroad aspirants.
+                </p>
+              </div>
+              <div className="p-4 rounded-2xl border border-white/10 bg-white/[0.02]">
+                <h4 className="text-base font-semibold text-white mb-1">Mentored 2,000+ Engineering Students</h4>
+                <p className="text-sm text-white/50 font-light leading-relaxed">
+                  Provided hands-on academic guidance, technical education, and career-focused support in AI, software development, and core engineering concepts.
+                </p>
+              </div>
+            </div>
 
             <a
               href="https://www.youtube.com/@dmsaiedutech"

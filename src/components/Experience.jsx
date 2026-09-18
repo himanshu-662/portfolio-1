@@ -2,19 +2,23 @@ import { motion } from "framer-motion";
 
 const EXPERIENCE = [
   {
-    role: "Associate Product Manager Intern",
-    company: "Margam - Study Abroad",
-    type: "On-site",
-    period: "June 2025 – Present",
-    quote: "Led the development of AI-driven solutions for study abroad workflows, boosting operational efficiency.",
+    role: "Developer Intern",
+    company: "Margam – Study Abroad",
+    type: "Internship",
+    period: "Jun 2025 – May 2026",
+    quote: "Prototyped LLM-powered student assistants and automated study-abroad guidance workflows through evidence-based development.",
     bullets: [
       {
-        title: "Built & Deployed Margam AI",
-        body: "Engineered an LLM-powered assistant (currently in testing) to automate student guidance, minimising manual overhead and redesigning internal workflows.",
+        title: "LLM-Powered Student Assistant",
+        body: "Prototyped an LLM-powered student assistant using Python, LLM APIs, RAG pipelines, and prompt engineering to automate student guidance workflows.",
       },
       {
-        title: "Drove Product Strategy",
-        body: "Authored comprehensive PRDs and collaborated directly with engineering teams to ensure rapid, user-centric feature delivery.",
+        title: "Stakeholder Collaboration & Evaluation",
+        body: "Collaborated with product and design stakeholders to validate AI workflows, improve response quality through LLM experimentation, structured prompting, and user feedback, and identify process inefficiencies.",
+      },
+      {
+        title: "Rapid Prototyping & Production Transition",
+        body: "Documented technical learnings and validated AI-driven solutions through rapid prototyping and workflow experimentation to support further development and transition toward production.",
       },
     ],
     dotColor: "bg-indigo-500",
@@ -22,19 +26,19 @@ const EXPERIENCE = [
     accent: "text-indigo-400",
   },
   {
-    role: "YouTube Content Creator",
+    role: "Content Creator & Educator",
     company: "dms ai edu tech",
     type: "Self-directed",
     period: "Sep 2023 – Present",
-    quote: "Built and grew an engaged audience through a consistent, value-driven content strategy simplifying complex academic concepts.",
+    quote: "Mentored 2,000+ engineering students through academic guidance, technical education, and career-focused support.",
     bullets: [
       {
-        title: "Community Engine",
-        body: "Organically grew the channel to 20,000+ subscribers, generating 5M+ total views by delivering high-impact technological insights and trend updates.",
+        title: "Engineering Mentorship",
+        body: "Mentored 2,000+ engineering students through academic guidance, technical education, and career-focused support.",
       },
       {
-        title: "Digital Education & Mentorship",
-        body: "Educated and directly mentored 1,000+ students, accelerating academic performance by breaking down technical engineering concepts.",
+        title: "Community & Video Reach",
+        body: "Built and grew an engaged community across YouTube, generating 6M+ views delivering insights in AI, automation, and core engineering.",
       },
     ],
     dotColor: "bg-red-500",
